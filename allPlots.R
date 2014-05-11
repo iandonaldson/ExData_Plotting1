@@ -1,5 +1,3 @@
-#code for plot 1
-
 #download data
 setwd(".")
 download.file("https://d396qusza40orc.cloudfront.net/exdata%2Fdata%2Fhousehold_power_consumption.zip", destfile="power.zip", method="curl")
@@ -48,6 +46,7 @@ rm(all.data, newDate, newTime)
 
 #make the plot and save as a file
 #1
+par(mfrow=c(1,1))
 with(sub.data, hist(Global_active_power, 
                     col="red", 
                     main="Global Active Power", 
@@ -58,19 +57,20 @@ dev.off()
 
 
 #2
+par(mfrow=c(1,1))
 theTime <- as.POSIXct(paste(sub.data$Date, sub.data$Time), format="%Y-%m-%d %H:%M:%S")
 with(sub.data, 
      plot(theTime, Global_active_power, 
           xlab="",
           ylab="Global active power (kilowatts)",
           type="l"
-          ));
+     ));
 
 dev.copy(png, file = "plot2.png", width=480, height=480)
 dev.off()
 
 #3
-
+par(mfrow=c(1,1))
 theTime <- as.POSIXct(paste(sub.data$Date, sub.data$Time), format="%Y-%m-%d %H:%M:%S")
 par(mfrow=c(1,1))
 with(sub.data,
@@ -79,7 +79,7 @@ with(sub.data,
           ylab="Global active power (kilowatts)",
           type="l",
           ylim=c(0,max(Sub_metering_1))
-          ));
+     ));
 par(new=TRUE)
 with(sub.data,
      plot(theTime, Sub_metering_2,
@@ -110,7 +110,6 @@ dev.off()
 par(mfrow=c(2,2))
 
 #4a
-
 theTime <- as.POSIXct(paste(sub.data$Date, sub.data$Time), format="%Y-%m-%d %H:%M:%S")
 with(sub.data, 
      plot(theTime, Global_active_power, 
@@ -121,7 +120,6 @@ with(sub.data,
 
 
 #4b
-
 theTime <- as.POSIXct(paste(sub.data$Date, sub.data$Time), format="%Y-%m-%d %H:%M:%S")
 with(sub.data, 
      plot(theTime, Voltage, 
@@ -131,7 +129,6 @@ with(sub.data,
      ));
 
 #4c
-
 theTime <- as.POSIXct(paste(sub.data$Date, sub.data$Time), format="%Y-%m-%d %H:%M:%S")
 with(sub.data,
      plot(theTime, Sub_metering_1,
@@ -163,7 +160,6 @@ legend("topright", legend=c("Sub_metering_1","Sub_metering_2","Sub_metering_3"),
 
 
 #4d
-
 theTime <- as.POSIXct(paste(sub.data$Date, sub.data$Time), format="%Y-%m-%d %H:%M:%S")
 with(sub.data, 
      plot(theTime, Global_reactive_power, 
